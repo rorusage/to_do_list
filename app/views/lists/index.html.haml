@@ -10,9 +10,9 @@
     %tbody
       - @lists.each do |list|
         %tr
-          %th.glyphicon.glyphicon-check
-          %th= link_to(list.title, list_path(list))
-          %th= list.content
-          %th= link_to("Edit", edit_list_path(list), class: "btn btn-sm btn-info")
-          %th= link_to("Delete", list_path(list), class: "btn btn-sm btn-danger", method: :delete, data: {confirm: "Are You Sure?"})
+          %td.glyphicon.glyphicon-check
+          %td= link_to(list.title, list_path(list))
+          %td= list.content
+          %td= link_to("Edit", edit_list_path(list), class: "btn btn-sm btn-info")
+          %td= link_to("Delete", list_path(list), class: "btn btn-sm btn-danger", method: :delete, data: {confirm: "Are You Sure?"})
 

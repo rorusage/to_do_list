@@ -3,4 +3,23 @@
   %p= @list.content
   %hr
 
+  %table.table.table-hover
+    %thead
+      %tr
+        %th.glyphicon.glyphicon-check
+        %th Item
+        %th
+        %th
+
+    %tbody
+      - @items.each do |item|
+        %tr
+          %td.glyphicon.glyphicon-check
+          %td= item.content
+          %td= link_to("Edit", edit_list_item_path(item.list, item), class: "btn btn-info btn-sm")
+          %td= link_to("Delete", list_item_path(item.list, item), class: "btn btn-danger btn-sm", method: :delete, data: {confirm: "Are You Sure?"})
+      %tr
+        %td.glyphicon.glyphicon-plus
+        %td= link_to("New Item", new_list_item_path(@list))
+
 

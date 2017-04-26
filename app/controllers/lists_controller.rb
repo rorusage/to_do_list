@@ -19,6 +19,7 @@ class ListsController < ApplicationController
   end
 
   def show
+    @items = @list.items
   end
 
   def edit
