@@ -1,0 +1,9 @@
+.col-md-4.col-md-offset-4
+  %h1 編輯記事
+  %hr
+
+  =simple_form_for @list do |f|
+    .form-group
+      = f.input :title, input_html: {class: "form-control"}
+      = f.input :content, input_html: {class: "form-control"}
+    = f.submit "Submit", class: "btn btn-primary", data: {disable_with: "Submitting..."}
