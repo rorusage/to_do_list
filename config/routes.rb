@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   root 'lists#index'
   resources :lists do
-    resources :items
+    member do
+      patch :complete
+    end
+    resources :items do
+      #put 'complete_item', to: 'items#complete', as: :complete_items
+      member do
+        patch :complete
+      end
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

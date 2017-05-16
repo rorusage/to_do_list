@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :find_list, only: [:show, :edit, :update, :destroy]
+  before_action :find_list, only: [:show, :edit, :update, :destroy, :complete]
   def index
     @lists = List.all
   end
@@ -23,6 +23,7 @@ class ListsController < ApplicationController
   end
 
   def edit
+    @items = @list.items
   end
 
   def update
@@ -38,10 +39,15 @@ class ListsController < ApplicationController
     redirect_to lists_path, alert: "記事已刪除！"
   end
 
+  def complete
+    @list.update_attribute(:done, true)
+
+    redirect_to lists_path
+  end
   private
 
   def list_params
-    params.require(:list).permit(:title, :content)
+    params.require(:list).permit(:title, :content, items_attributes: [:id, :content, :done, :_destroy])
   end
 
   def find_list

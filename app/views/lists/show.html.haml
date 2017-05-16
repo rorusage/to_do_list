@@ -3,23 +3,52 @@
   %p= @list.content
   %hr
 
-  %table.table.table-hover
+  %table.table
     %thead
       %tr
-        %th.glyphicon.glyphicon-check
-        %th Item
-        %th
-        %th
-
+        %th.glyphicon.glyphicon-check Item
+        %th Edit
+        %th Delete
     %tbody
       - @items.each do |item|
         %tr
-          %td.glyphicon.glyphicon-check
-          %td= item.content
-          %td= link_to("Edit", edit_list_item_path(item.list, item), class: "btn btn-info btn-sm")
-          %td= link_to("Delete", list_item_path(item.list, item), class: "btn btn-danger btn-sm", method: :delete, data: {confirm: "Are You Sure?"})
-      %tr
-        %td.glyphicon.glyphicon-plus
-        %td= link_to("New Item", new_list_item_path(@list))
+          - if item.done?
+            %td
+              = link_to(complete_list_item_path(item.list, item), class: "btn-lg", method: :patch) do
+                %i.fa.fa-check
+              %strike #{item.content}
+              -# =check_box_tag "packersOff", item.id, item.done
+              -# %label.strikethrough #{item.content}
+            %td
+              = link_to(edit_list_item_path(item.list, item), class: "btn-lg") do
+                %i.fa.fa-edit
+            %td
+              = link_to(list_item_path(item.list, item), class: "btn-lg", method: :delete, data: {confirm: "Are You Sure?"}) do
+                %i.fa.fa-trash
+          - else
+            %td
+              = link_to(complete_list_item_path(item.list, item), class: "btn-lg", method: :patch) do
+                %i.fa.fa-check
+              -# =check_box_tag "packersOff", item.id, item.done
+              %strong #{item.content}
+            %td
+              = link_to(edit_list_item_path(item.list, item), class: "btn-lg") do
+                %i.fa.fa-edit
+            %td
+              = link_to(list_item_path(item.list, item), class: "btn-lg", method: :delete, data: {confirm: "Are You Sure?"}) do
+                %i.fa.fa-trash
+
+
+
+  %hr
+  .glyphicon.glyphicon-plus
+  = link_to("New Item", new_list_item_path(@list))
+  %hr
+  .text-center.btn-group
+    = link_to("Edit", edit_list_path(@list), class: "btn btn-primary")
+    = link_to("Delete", list_path(@list), class: "btn btn-danger", method: :delete, data: {confirm: "Are You Sure?"})
+    = link_to("Back", lists_path, class: "btn btn-info")
+
+
 
 

@@ -17,3 +17,4 @@
 //= require bootstrap/dropdown
 //= require bootstrap/alert
 //= require_tree .
+//= require cocoon

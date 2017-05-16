@@ -6,4 +6,22 @@
     .form-group
       = f.input :title, input_html: {class: "form-control"}
       = f.input :content, input_html: {class: "form-control"}
+      -# %ul.items
+      -#   - @items.each do |item|
+      -#     %li
+      -#     =check_box_tag "packersOff", "1", item.done
+      -#     %label.strikethrough #{item.content}
+      -#     = link_to("Edit", edit_list_item_path(item.list, item), class: "btn btn-info btn-sm")
+      -#     = link_to("Delete", list_item_path(item.list, item), class: "btn btn-danger btn-sm", method: :delete, data: {confirm: "Are You Sure?"})
+
+      -# .glyphicon.glyphicon-plus
+      -# = link_to("New Item", new_list_item_path(@list))
+
+      %h3 Items
+      #items
+        = f.simple_fields_for :items do |item|
+          = render "items/item_fields", f: item
+        .links
+          = link_to_add_association 'add item', f, :items, partial: "items/item_fields"
+
     = f.submit "Submit", class: "btn btn-primary", data: {disable_with: "Submitting..."}

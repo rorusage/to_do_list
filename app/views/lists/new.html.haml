@@ -6,4 +6,10 @@
     .form-group
       = f.input :title, input_html: {class: "form-control"}
       = f.input :content, input_html: {class: "form-control"}
+      %h3 Items
+      #items
+        = f.simple_fields_for :items do |item|
+          = render "items/item_fields", f: item
+        .links
+          = link_to_add_association 'add item', f, :items, partial: "items/item_fields"
     = f.submit "Submit", class: "btn btn-primary", data: {disable_with: "Submitting..."}

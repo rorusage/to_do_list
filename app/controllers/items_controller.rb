@@ -38,6 +38,14 @@ class ItemsController < ApplicationController
     redirect_to list_path(@list), alert: "記事項目已刪除！"
   end
 
+  def complete
+    @list = List.find(params[:list_id])
+    @item = @list.items.find(params[:id])
+    @item.update_attribute(:done, true)
+
+    redirect_to list_path(@list)
+  end
+
   private
   def item_params
     params.require(:item).permit(:content)

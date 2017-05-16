@@ -1,0 +1,27 @@
+- if i.done?
+  %td
+  = link_to(complete_list_item_path(i.list, i), class: "btn-lg", method: :patch) do
+    %i.fa.fa-check
+  %td
+  %strike #{i.content}
+  -# =check_box_tag "packersOff", item.id, item.done
+  -# %label.strikethrough #{item.content}
+  %td
+  = link_to(edit_list_item_path(i.list, i), class: "btn-lg") do
+    %i.fa.fa-edit
+  %td
+  = link_to(list_item_path(i.list, i), class: "btn-lg", method: :delete, data: {confirm: "Are You Sure?"}) do
+    %i.fa.fa-trash
+- else
+  %td
+  = link_to(complete_list_item_path(i.list, i), class: "btn-lg", method: :patch) do
+    %i.fa.fa-check
+  -# =check_box_tag "packersOff", item.id, item.done
+  %td
+  %strong #{i.content}
+  %td
+  = link_to(edit_list_item_path(i.list, i), class: "btn-lg") do
+    %i.fa.fa-edit
+  %td
+  = link_to(list_item_path(i.list, i), class: "btn-lg", method: :delete, data: {confirm: "Are You Sure?"}) do
+    %i.fa.fa-trash

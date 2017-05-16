@@ -1,18 +1,29 @@
-.col-md-4.col-md-off-set-4
+.col-md-4.col-md-offset-4
   %table.table.table-hover
     %thead
       %tr
-        %th.glyphicon.glyphicon-check
-        %th Project
+        %th.glyphicon.glyphicon-check  Project
+        %th Description
         %th
-        %th
+
 
     %tbody
       - @lists.each do |list|
         %tr
-          %td.glyphicon.glyphicon-check
-          %td= link_to(list.title, list_path(list))
+          %td
+            - if list.done?
+              = link_to(complete_list_path(list), class: "btn-lg", method: :patch) do
+                %i.fa.fa-check
+              %strike= link_to(list.title, list_path(list))
+            - else
+              = link_to(complete_list_path(list), class: "btn-lg", method: :patch) do
+                %i.fa.fa-check
+              = link_to(list.title, list_path(list))
+            -# .checkbox
+              -# %input{name: "packersOff", value: "1", type: "checkbox"}
+              -# %label.strikethrough= link_to(list.title, list_path(list))
           %td= list.content
-          %td= link_to("Edit", edit_list_path(list), class: "btn btn-sm btn-info")
-          %td= link_to("Delete", list_path(list), class: "btn btn-sm btn-danger", method: :delete, data: {confirm: "Are You Sure?"})
+          %td
+            = link_to("Edit", edit_list_path(list), class: "btn btn-sm btn-info")
+            = link_to("Delete", list_path(list), class: "btn btn-sm btn-danger", method: :delete, data: {confirm: "Are You Sure?"})
 
